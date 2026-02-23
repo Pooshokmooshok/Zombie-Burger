@@ -44,15 +44,25 @@ body {
 ================================================ */
 #burger {
   position: absolute;     /* Sits on top of the background */
-  font-size: 5rem;        /* Big emoji so it's easy to click */
   cursor: pointer;        /* Hand cursor on hover */
+
+  /* Position: nudged left and down from center */
+  top: calc(50% + 175px);  /* lower than center — increase to move further down */
+  left: calc(50% + 60px);  /* right of center — increase to move further right */
+  transform: translate(-50%, -50%); /* anchor from the burger's own center */
 
   /* Smooth bounce on hover so the player knows it's clickable */
   transition: transform 0.1s ease;
 }
 
+#burger img {
+  width: 400px;           /* slightly bigger */
+  height: auto;           /* Keep aspect ratio */
+  display: block;
+}
+
 #burger:hover {
-  transform: scale(1.15); /* Slightly grow on hover */
+  transform: translate(-50%, -50%) scale(1.15); /* must include the translate so it doesn't jump */
 }
 
 
@@ -62,8 +72,8 @@ body {
    One full 360° rotation over 0.6 seconds.
 ================================================ */
 @keyframes spin {
-  from { transform: rotate(0deg);   }
-  to   { transform: rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg);   }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* The class game.js toggles on/off */

@@ -73,10 +73,9 @@ function addToInventory() {
   const item = document.createElement('div');
   item.classList.add('inventory-item');  // styled in style.css
 
-  // Fill it with an icon and a label
-  // SWAP: replace '🍔' with <img> once you have a real burger image
+  // Fill it with the burger image and a label
   item.innerHTML = `
-    <span class="icon">🍔</span>
+    <img src="art/k8burgerstill.png" alt="burger" style="width:40px; height:auto;" />
     <span class="label">Burger #${burgerCount}</span>
   `;
 
