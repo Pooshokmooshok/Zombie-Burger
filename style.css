@@ -201,3 +201,112 @@ body {
 #acq-txt.show {
   animation: acqDrop 4s ease forwards;
 }
+
+
+/* ================================================
+   MOBILE LAYOUT
+   Applies on screens 768px wide or smaller (phones)
+================================================ */
+@media (max-width: 768px) {
+
+  /* Stack game world on top, inventory bar on bottom */
+  body {
+    flex-direction: column;
+  }
+
+  /* Background fits full width, anchored to top */
+  #game-world {
+    background-size: 100% auto;
+    background-position: top center;
+    flex: 1;                  /* takes all space above the inventory bar */
+  }
+
+  /* Burger — smaller and repositioned for phone screen */
+  #burger {
+    top: calc(50% + 80px);
+    left: 50%;
+  }
+
+  #burger img {
+    width: 180px;             /* smaller on phone */
+  }
+
+  /* Inventory — horizontal bar along the bottom */
+  #inventory {
+    width: 100%;              /* full width */
+    height: 110px;
+    flex-direction: row;      /* items laid out left to right */
+    align-items: center;
+    padding: 8px 12px;
+    border-left: none;
+    border-top: 3px solid #dd00ff;
+    gap: 8px;
+  }
+
+  /* "Inventory" title — small, left corner */
+  #inventory h2 {
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    writing-mode: vertical-rl; /* rotated vertically to save space */
+    border-bottom: none;
+    border-right: 1px solid #dd00ff;
+    padding-bottom: 0;
+    padding-right: 6px;
+    white-space: nowrap;
+  }
+
+  /* Items display in a row */
+  #inventory-items {
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;         /* scroll if many items */
+  }
+
+  .inventory-item {
+    margin-top: 0;
+    flex-shrink: 0;
+  }
+
+  .inventory-item img {
+    width: 70px;              /* small thumbnails in horizontal bar */
+  }
+
+  /* Reset button — fixed at top right of screen */
+  #reset-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    border-top: none;
+    border: 1px solid #dd00ff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    margin-top: 0;
+    z-index: 100;
+    background: rgba(0, 130, 204, 0.85);
+  }
+
+  /* Acquired text — smaller, appears instantly at top, no animation */
+  #acq-txt {
+    width: 280px;
+    top: 60px;                /* just below reset button */
+  }
+
+  #acq-txt.show {
+    animation: acqDropMobile 4s ease forwards;
+  }
+
+  @keyframes acqDropMobile {
+    0%   { top: 60px; opacity: 1; }  /* appears instantly */
+    80%  { top: 60px; opacity: 1; }
+    100% { top: 60px; opacity: 0; }
+  }
+
+  /* More text — smaller, appears instantly near top */
+  #more-txt {
+    width: 280px;
+    top: 60px;
+  }
+}
