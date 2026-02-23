@@ -24,25 +24,16 @@ body {
   position: relative;     /* Lets us position the burger freely inside */
   flex: 1;                /* Takes up all space left of the inventory */
 
-  /* PLACEHOLDER: flat color background.
-     Replace this block with:
-       background-image: url('background.png');
-       background-size: cover;
-       background-position: center;
-     once you have your background image. */
-  background-color: #a8d8a8;   /* soft green placeholder */
+  /* Real background image */
+  background-image: url('art/k8background.jpg');
+  background-size: auto 100%;   /* fit to full height, width scales naturally */
+  background-repeat: no-repeat; /* no tiling */
+  background-position: center;      /* image centered, black on both sides */
+  background-color: black;      /* remaining space on the right is black */
 
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Placeholder label shown in the middle of the background */
-#bg-label {
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
-  pointer-events: none;   /* Clicks pass through this label to the burger */
-  user-select: none;
 }
 
 
