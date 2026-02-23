@@ -56,8 +56,8 @@ body {
 }
 
 #burger img {
-  width: 400px;           /* slightly bigger */
-  height: auto;           /* Keep aspect ratio */
+  width: 400px;
+  height: auto;
   display: block;
 }
 
@@ -65,21 +65,6 @@ body {
   transform: translate(-50%, -50%) scale(1.15); /* must include the translate so it doesn't jump */
 }
 
-
-/* ================================================
-   SPIN ANIMATION
-   Added by game.js when the player clicks the burger.
-   One full 360° rotation over 0.6 seconds.
-================================================ */
-@keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg);   }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* The class game.js toggles on/off */
-#burger.spinning {
-  animation: spin 0.6s ease-in-out;
-}
 
 
 /* ================================================

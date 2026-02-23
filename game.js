@@ -3,84 +3,84 @@
 // ================================================
 // What this file does:
 //   1. Waits for the player to click the burger
-//   2. Plays a spin animation on the burger
-//   3. Adds the burger to the inventory panel
-//   4. Hides the burger from the world (it was picked up!)
+//   2. Burger pops to the center of the screen and scales up
+//   3. Then fades out, gets added to the inventory
 // ================================================
 
 
 // ------------------------------------------------
 // STEP 1: Grab references to the HTML elements
-//         we need to control.
 // ------------------------------------------------
 
-const burger         = document.getElementById('burger');         // the clickable burger in the world
-const inventoryItems = document.getElementById('inventory-items'); // the inventory list on the right
+const burger         = document.getElementById('burger');
+const inventoryItems = document.getElementById('inventory-items');
 
 
 // ------------------------------------------------
-// STEP 2: Keep track of how many burgers collected.
-//         Starts at 0.
+// STEP 2: Track how many burgers collected
 // ------------------------------------------------
 
 let burgerCount = 0;
+let isAnimating = false; // prevents double-clicking during animation
 
 
 // ------------------------------------------------
-// STEP 3: Listen for a click on the burger.
-//         When clicked → spin it → then pick it up.
+// STEP 3: Listen for a click on the burger
 // ------------------------------------------------
 
 burger.addEventListener('click', function () {
 
-  // Don't allow clicking again while it's already spinning
-  if (burger.classList.contains('spinning')) return;
+  // Ignore clicks while animation is already running
+  if (isAnimating) return;
+  isAnimating = true;
 
-  // --- Start the spin ---
-  // Adding the 'spinning' class triggers the CSS @keyframes animation
-  burger.classList.add('spinning');
+  // --- PHASE 1: Pop to center and scale up ---
+  burger.style.transition = 'top 0.4s ease, left 0.4s ease, transform 0.4s ease';
+  burger.style.top        = '50%';
+  burger.style.left       = '50%';
+  burger.style.transform  = 'translate(-50%, -50%) scale(3.5)';
 
-  // --- Wait for spin to finish, then pick it up ---
-  // 600ms matches the animation duration defined in style.css
+  // --- PHASE 2: After it pops open, fade it out ---
   setTimeout(function () {
 
-    // Remove the spinning class so it can spin again if reused later
-    burger.classList.remove('spinning');
+    burger.style.transition = 'opacity 0.35s ease';
+    burger.style.opacity    = '0';
 
-    // Hide the burger from the game world (it's been picked up)
-    burger.style.display = 'none';
+    // --- PHASE 3: After fade, hide it and add to inventory ---
+    setTimeout(function () {
 
-    // Add it to the inventory
-    addToInventory();
+      burger.style.display = 'none';
 
-  }, 600); // 600 milliseconds = 0.6 seconds
+      // Reset styles so it starts fresh if it ever reappears
+      burger.style.transition = '';
+      burger.style.opacity    = '1';
+      isAnimating = false;
+
+      addToInventory();
+
+    }, 350);
+
+  }, 500);
 
 });
 
 
 // ------------------------------------------------
 // STEP 4: addToInventory()
-//         Creates a new item row and appends it
-//         to the inventory panel.
+//         Adds the burger image to the inventory panel
 // ------------------------------------------------
 
 function addToInventory() {
-
-  // Increase our counter
   burgerCount++;
 
-  // Create a new <div> for this inventory item
   const item = document.createElement('div');
-  item.classList.add('inventory-item');  // styled in style.css
+  item.classList.add('inventory-item');
 
-  // Just the burger image, nothing else
   item.innerHTML = `
     <img src="art/k8burgerstill.png" alt="burger" />
   `;
 
-  // Add the new item to the inventory panel
   inventoryItems.appendChild(item);
 
-  // Log to console for easy debugging during development
   console.log(`Burger #${burgerCount} added to inventory!`);
 }
