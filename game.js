@@ -73,10 +73,9 @@ function addToInventory() {
   const item = document.createElement('div');
   item.classList.add('inventory-item');  // styled in style.css
 
-  // Fill it with the burger image and a label
+  // Just the burger image, nothing else
   item.innerHTML = `
-    <img src="art/k8burgerstill.png" alt="burger" style="width:40px; height:auto;" />
-    <span class="label">Burger #${burgerCount}</span>
+    <img src="art/k8burgerstill.png" alt="burger" />
   `;
 
   // Add the new item to the inventory panel

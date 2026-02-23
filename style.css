@@ -88,21 +88,24 @@ body {
 ================================================ */
 #inventory {
   width: 200px;
-  background-color: #2c2c2c;   /* Dark background */
+  background: #0082cc;  /* slightly darker than #00a3ff */
   color: #ffffff;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-left: 3px solid #555;
+  border-left: 3px solid #dd00ff;   /* magenta-purple border from k8colors */
 }
 
 #inventory h2 {
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #dd00ff;  /* purple divider line */
   padding-bottom: 8px;
+  /* White text with purple shadow */
+  color: #ffffff;
+  text-shadow: 0 0 8px #dd00ff, 1px 1px 3px rgba(0,0,0,0.6);
 }
 
 /* Container that holds the collected burger icons */
@@ -119,20 +122,21 @@ body {
 ================================================ */
 .inventory-item {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.5rem;       /* Burger emoji size in inventory */
-  background-color: #3d3d3d;
-  padding: 6px 10px;
-  border-radius: 8px;
+  justify-content: center;  /* center the burger horizontally */
+  margin-top: 20px;         /* pushes the item lower in the panel */
 
   /* Slide in from the right when added */
   animation: slideIn 0.3s ease;
 }
 
-.inventory-item span.label {
-  font-size: 0.8rem;
-  color: #cccccc;
+.inventory-item img {
+  width: 160%;              /* bigger than the panel width */
+  height: auto;
+  display: block;
+  /* drop-shadow follows the burger shape */
+  filter:
+    drop-shadow(0 0 1.5px #dd00ff)
+    drop-shadow(0 0 1.5px #dd00ff);
 }
 
 /* Slide-in animation for new inventory items */
