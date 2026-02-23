@@ -16,6 +16,7 @@ const burger         = document.getElementById('burger');
 const inventoryItems = document.getElementById('inventory-items');
 const acqTxt         = document.getElementById('acq-txt');
 const moreTxt        = document.getElementById('more-txt');
+const resetBtn       = document.getElementById('reset-btn');
 
 
 // ------------------------------------------------
@@ -24,6 +25,9 @@ const moreTxt        = document.getElementById('more-txt');
 
 let burgerCount = 0;
 let isAnimating = false; // prevents double-clicking during animation
+
+// Store timeout IDs so reset can cancel them mid-cycle
+let activeTimeouts = [];
 
 
 // ------------------------------------------------
@@ -43,43 +47,78 @@ burger.addEventListener('click', function () {
   burger.style.transform  = 'translate(-50%, -50%) scale(3.5)';
 
   // --- PHASE 2: After it pops open, fade it out ---
-  setTimeout(function () {
+  activeTimeouts.push(setTimeout(function () {
 
     burger.style.transition = 'opacity 0.6s ease';
     burger.style.opacity    = '0';
 
     // --- PHASE 3: After fade, hide it and add to inventory ---
-    setTimeout(function () {
+    activeTimeouts.push(setTimeout(function () {
 
       burger.style.display = 'none';
 
-      // Reset styles so it starts fresh if it ever reappears
       burger.style.transition = '';
       burger.style.opacity    = '1';
       isAnimating = false;
 
-      // Show the acquired text — drops in from top then fades out
+      // Show the acquired text
       acqTxt.classList.remove('show');
-      void acqTxt.offsetWidth;                   // force reflow so animation restarts
+      void acqTxt.offsetWidth;
       acqTxt.classList.add('show');
 
       // After acqtxt finishes (4s), fade in the more text
-      setTimeout(function () {
+      activeTimeouts.push(setTimeout(function () {
         moreTxt.classList.add('show');
-        moreTxt.style.opacity = '1';           // fade in
+        moreTxt.style.opacity = '1';
 
         // After 2.5 seconds, fade it back out
-        setTimeout(function () {
+        activeTimeouts.push(setTimeout(function () {
           moreTxt.style.opacity = '0';
-        }, 2500);
+        }, 2500));
 
-      }, 4000);
+      }, 4000));
 
       addToInventory();
 
-    }, 600);
+    }, 600));
 
-  }, 1100);
+  }, 1100));
+
+});
+
+
+// ------------------------------------------------
+// STEP 4: addToInventory()
+//         Adds the burger image to the inventory panel
+// ------------------------------------------------
+
+// ------------------------------------------------
+// STEP 5: Reset — puts the burger back, clears inventory
+// ------------------------------------------------
+
+resetBtn.addEventListener('click', function () {
+
+  // Cancel any running animation timeouts
+  activeTimeouts.forEach(function (id) { clearTimeout(id); });
+  activeTimeouts = [];
+
+  // Clear inventory items
+  inventoryItems.innerHTML = '';
+  burgerCount = 0;
+
+  // Reset text overlays
+  acqTxt.classList.remove('show');
+  moreTxt.classList.remove('show');
+  moreTxt.style.opacity = '0';
+
+  // Restore burger to its original position and show it
+  burger.style.transition = '';
+  burger.style.top        = '';
+  burger.style.left       = '';
+  burger.style.transform  = '';
+  burger.style.opacity    = '1';
+  burger.style.display    = 'block';
+  isAnimating             = false;
 
 });
 
