@@ -129,3 +129,54 @@ body {
   from { opacity: 0; transform: translateX(30px); }
   to   { opacity: 1; transform: translateX(0);    }
 }
+
+
+/* ================================================
+   ACQUIRED TEXT
+   Hidden by default. Fades in from top to center,
+   then fades out after a moment.
+================================================ */
+#acq-txt {
+  position: absolute;
+  width: 560px;
+  left: 50%;
+  transform: translateX(-50%);  /* horizontally centered */
+
+  /* Start hidden above the screen */
+  top: -120px;
+  opacity: 0;
+  pointer-events: none;         /* not clickable */
+  transition: none;
+}
+
+/* ================================================
+   MORE TEXT
+   Fades in right after acqtxt disappears, stays 4s, fades out.
+================================================ */
+#more-txt {
+  position: absolute;
+  width: 560px;
+  left: 50%;
+  top: 17%;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#more-txt.show {
+  transition: opacity 0.8s ease;
+}
+
+
+/* Triggered by game.js — drops in from top and fades in */
+@keyframes acqDrop {
+  0%   { top: -120px; opacity: 0; }
+  30%  { opacity: 1; }
+  60%  { top: 38%;   opacity: 1; }
+  85%  { top: 38%;   opacity: 1; }
+  100% { top: 38%;   opacity: 0; }
+}
+
+#acq-txt.show {
+  animation: acqDrop 4s ease forwards;
+}

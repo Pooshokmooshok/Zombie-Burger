@@ -14,6 +14,8 @@
 
 const burger         = document.getElementById('burger');
 const inventoryItems = document.getElementById('inventory-items');
+const acqTxt         = document.getElementById('acq-txt');
+const moreTxt        = document.getElementById('more-txt');
 
 
 // ------------------------------------------------
@@ -35,7 +37,7 @@ burger.addEventListener('click', function () {
   isAnimating = true;
 
   // --- PHASE 1: Pop to center and scale up ---
-  burger.style.transition = 'top 0.4s ease, left 0.4s ease, transform 0.4s ease';
+  burger.style.transition = 'top 0.9s ease, left 0.9s ease, transform 0.9s ease';
   burger.style.top        = '50%';
   burger.style.left       = '50%';
   burger.style.transform  = 'translate(-50%, -50%) scale(3.5)';
@@ -43,7 +45,7 @@ burger.addEventListener('click', function () {
   // --- PHASE 2: After it pops open, fade it out ---
   setTimeout(function () {
 
-    burger.style.transition = 'opacity 0.35s ease';
+    burger.style.transition = 'opacity 0.6s ease';
     burger.style.opacity    = '0';
 
     // --- PHASE 3: After fade, hide it and add to inventory ---
@@ -56,11 +58,28 @@ burger.addEventListener('click', function () {
       burger.style.opacity    = '1';
       isAnimating = false;
 
+      // Show the acquired text — drops in from top then fades out
+      acqTxt.classList.remove('show');
+      void acqTxt.offsetWidth;                   // force reflow so animation restarts
+      acqTxt.classList.add('show');
+
+      // After acqtxt finishes (4s), fade in the more text
+      setTimeout(function () {
+        moreTxt.classList.add('show');
+        moreTxt.style.opacity = '1';           // fade in
+
+        // After 2.5 seconds, fade it back out
+        setTimeout(function () {
+          moreTxt.style.opacity = '0';
+        }, 2500);
+
+      }, 4000);
+
       addToInventory();
 
-    }, 350);
+    }, 600);
 
-  }, 500);
+  }, 1100);
 
 });
 
