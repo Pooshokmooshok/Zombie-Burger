@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Burger Picker</title>
+
+  <!-- Link to our stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =============================================
+       GAME WORLD
+       This is the main play area / background.
+       Later you can swap the placeholder color
+       for a real background image.
+  ============================================= -->
+  <div id="game-world">
+
+    <!-- PLACEHOLDER LABEL (remove once you have a real background) -->
+    <p id="bg-label">[ Background goes here ]</p>
+
+    <!-- =============================================
+         BURGER
+         This is the item the player clicks to pick up.
+         Later you can swap the emoji for an <img> tag.
+    ============================================= -->
+    <div id="burger">
+      🍔
+      <!-- SWAP EMOJI: replace the line above with:
+           <img src="burger.png" alt="burger" />
+           once you drop your burger image into the folder.
+      -->
+    </div>
+
+  </div><!-- end game-world -->
+
+
+  <!-- =============================================
+       INVENTORY PANEL
+       Shows every burger the player has picked up.
+  ============================================= -->
+  <div id="inventory">
+    <h2>Inventory</h2>
+
+    <!-- Burger items will be added here by game.js -->
+    <div id="inventory-items"></div>
+  </div>
+
+
+  <!-- Link to our game logic (loaded last so HTML is ready first) -->
+  <script src="game.js"></script>
+
+</body>
+</html>

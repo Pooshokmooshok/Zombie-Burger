@@ -1,0 +1,141 @@
+/* ================================================
+   RESET
+   Removes default browser spacing so everything
+   starts from a clean slate.
+================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;          /* Side-by-side layout: game | inventory */
+  height: 100vh;          /* Fill the full screen height */
+  overflow: hidden;       /* No scrollbars */
+}
+
+
+/* ================================================
+   GAME WORLD (the background / play area)
+================================================ */
+#game-world {
+  position: relative;     /* Lets us position the burger freely inside */
+  flex: 1;                /* Takes up all space left of the inventory */
+
+  /* PLACEHOLDER: flat color background.
+     Replace this block with:
+       background-image: url('background.png');
+       background-size: cover;
+       background-position: center;
+     once you have your background image. */
+  background-color: #a8d8a8;   /* soft green placeholder */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Placeholder label shown in the middle of the background */
+#bg-label {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  pointer-events: none;   /* Clicks pass through this label to the burger */
+  user-select: none;
+}
+
+
+/* ================================================
+   BURGER
+   Positioned in the center of the game world.
+   Clickable — triggers the spin + pickup.
+================================================ */
+#burger {
+  position: absolute;     /* Sits on top of the background */
+  font-size: 5rem;        /* Big emoji so it's easy to click */
+  cursor: pointer;        /* Hand cursor on hover */
+
+  /* Smooth bounce on hover so the player knows it's clickable */
+  transition: transform 0.1s ease;
+}
+
+#burger:hover {
+  transform: scale(1.15); /* Slightly grow on hover */
+}
+
+
+/* ================================================
+   SPIN ANIMATION
+   Added by game.js when the player clicks the burger.
+   One full 360° rotation over 0.6 seconds.
+================================================ */
+@keyframes spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* The class game.js toggles on/off */
+#burger.spinning {
+  animation: spin 0.6s ease-in-out;
+}
+
+
+/* ================================================
+   INVENTORY PANEL
+   Fixed sidebar on the right side of the screen.
+================================================ */
+#inventory {
+  width: 200px;
+  background-color: #2c2c2c;   /* Dark background */
+  color: #ffffff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 3px solid #555;
+}
+
+#inventory h2 {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 8px;
+}
+
+/* Container that holds the collected burger icons */
+#inventory-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+/* ================================================
+   INVENTORY ITEM
+   Each burger the player picks up gets this style.
+================================================ */
+.inventory-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;       /* Burger emoji size in inventory */
+  background-color: #3d3d3d;
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  /* Slide in from the right when added */
+  animation: slideIn 0.3s ease;
+}
+
+.inventory-item span.label {
+  font-size: 0.8rem;
+  color: #cccccc;
+}
+
+/* Slide-in animation for new inventory items */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
