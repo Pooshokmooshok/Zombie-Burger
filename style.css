@@ -1,4 +1,33 @@
 /* ================================================
+   CUSTOM CURSOR
+================================================ */
+
+/* Hide the default cursor everywhere */
+*,
+html,
+body {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/>") 0 0, none !important;
+}
+
+#custom-cursor {
+  position: fixed;          /* stays on top of everything */
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 56px;
+  pointer-events: none;     /* never blocks clicks */
+  z-index: 9999;            /* always on top */
+  transform: translate(0, 0); /* moved by JS */
+}
+
+#custom-cursor img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+/* ================================================
    RESET
    Removes default browser spacing so everything
    starts from a clean slate.
@@ -44,7 +73,7 @@ body {
 ================================================ */
 #burger {
   position: absolute;     /* Sits on top of the background */
-  cursor: pointer;        /* Hand cursor on hover */
+  cursor: none;           /* use custom cursor only */
 
   /* Position: nudged left and down from center */
   top: calc(50% + 175px);  /* lower than center — increase to move further down */

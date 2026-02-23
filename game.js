@@ -16,6 +16,32 @@ const burger         = document.getElementById('burger');
 const inventoryItems = document.getElementById('inventory-items');
 const acqTxt         = document.getElementById('acq-txt');
 const moreTxt        = document.getElementById('more-txt');
+const customCursor   = document.getElementById('custom-cursor');
+
+// Inject a style tag to forcefully hide the cursor on everything
+const hideCursorStyle = document.createElement('style');
+hideCursorStyle.textContent = '* { cursor: none !important; }';
+document.head.appendChild(hideCursorStyle);
+
+// Re-hide cursor whenever the mouse enters the window
+document.addEventListener('mouseenter', function () {
+  hideCursorStyle.textContent = '* { cursor: none !important; }';
+});
+
+// Move the custom cursor to follow the mouse
+document.addEventListener('mousemove', function (e) {
+  customCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+
+// Hide custom cursor when mouse leaves the window
+document.addEventListener('mouseleave', function () {
+  customCursor.style.opacity = '0';
+});
+
+// Show custom cursor when mouse returns
+document.addEventListener('mouseenter', function () {
+  customCursor.style.opacity = '1';
+});
 
 
 // ------------------------------------------------
