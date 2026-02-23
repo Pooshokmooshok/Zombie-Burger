@@ -214,27 +214,28 @@ body {
     flex-direction: column;
   }
 
-  /* Background fits full width, anchored to top */
+  /* Background fills the full game world area */
   #game-world {
-    background-size: 100% auto;
+    background-size: 130% auto;
     background-position: top center;
     flex: 1;                  /* takes all space above the inventory bar */
   }
 
-  /* Burger — smaller and repositioned for phone screen */
+  /* Burger — repositioned for phone screen */
   #burger {
-    top: calc(50% + 80px);
-    left: 50%;
+    top: calc(50% + 145px);
+    left: calc(50% + 30px);
   }
 
   #burger img {
-    width: 180px;             /* smaller on phone */
+    width: 280px;
   }
 
   /* Inventory — horizontal bar along the bottom */
   #inventory {
-    width: 100%;              /* full width */
-    height: 110px;
+    position: relative;       /* lets the h2 position relative to the bar */
+    width: 100%;
+    height: 150px;
     flex-direction: row;      /* items laid out left to right */
     align-items: center;
     padding: 8px 12px;
@@ -243,15 +244,17 @@ body {
     gap: 8px;
   }
 
-  /* "Inventory" title — small, left corner */
+  /* "Inventory" title — sits on top of the bar */
   #inventory h2 {
-    font-size: 0.55rem;
+    position: absolute;
+    top: -22px;               /* floats just above the bar */
+    left: 12px;
+    font-size: 0.75rem;
     letter-spacing: 1px;
-    writing-mode: vertical-rl; /* rotated vertically to save space */
+    writing-mode: horizontal-tb;
     border-bottom: none;
-    border-right: 1px solid #dd00ff;
-    padding-bottom: 0;
-    padding-right: 6px;
+    border-right: none;
+    padding: 0;
     white-space: nowrap;
   }
 
@@ -265,12 +268,12 @@ body {
   }
 
   .inventory-item {
-    margin-top: 0;
+    margin-top: -20px;        /* pulls the item higher, overlapping the bar edge */
     flex-shrink: 0;
   }
 
   .inventory-item img {
-    width: 70px;              /* small thumbnails in horizontal bar */
+    width: 140px;
   }
 
   /* Reset button — fixed at top right of screen */
@@ -282,16 +285,16 @@ body {
     border: 1px solid #dd00ff;
     padding: 5px 10px;
     border-radius: 6px;
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin-top: 0;
     z-index: 100;
     background: rgba(0, 130, 204, 0.85);
   }
 
-  /* Acquired text — smaller, appears instantly at top, no animation */
+  /* Acquired text — lower */
   #acq-txt {
     width: 280px;
-    top: 60px;                /* just below reset button */
+    top: 315px;
   }
 
   #acq-txt.show {
@@ -299,14 +302,15 @@ body {
   }
 
   @keyframes acqDropMobile {
-    0%   { top: 60px; opacity: 1; }  /* appears instantly */
-    80%  { top: 60px; opacity: 1; }
-    100% { top: 60px; opacity: 0; }
+    0%   { top: 315px; opacity: 1; }
+    80%  { top: 315px; opacity: 1; }
+    100% { top: 315px; opacity: 0; }
   }
 
-  /* More text — smaller, appears instantly near top */
+  /* More text — higher and slightly right */
   #more-txt {
-    width: 280px;
-    top: 60px;
+    width: 335px;
+    top: -60px;
+    left: calc(50% + 14px);
   }
 }
